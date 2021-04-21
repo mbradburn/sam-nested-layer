@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  Nested:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: Nested/template.yaml
+      Parameters:
+        SharedLayer: !Ref Layer
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Metadata:
+      BuildMethod: nodejs14.x
+    Properties:
+      ContentUri: src/Layer
+      RetentionPolicy: Delete
+      CompatibleRuntimes:
+        - nodejs14.x
